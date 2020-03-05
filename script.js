@@ -66,8 +66,11 @@ const show = {
 const fire = () => {
     const target = event.target;
     if (target.classList.length > 0 || target.tagName !== 'TD') return;
-    show.miss(target);
-    play.updateData = 'shot';
+    if (game.shipCount > 0){
+        show.miss(target);
+        play.updateData = 'shot';
+    }
+    
     
     for (let i = 0; i < game.ships.length; i++){
         const ship = game.ships[i];
@@ -103,6 +106,7 @@ const fire = () => {
 const init = () => {
     enemy.addEventListener('click', fire);
     play.render();
+    
 
     again.addEventListener('click', () => {
         location.reload();
